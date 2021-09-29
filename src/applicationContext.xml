@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<beans xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+	
+	<!-- Define your beans here -->
+	
+	<!-- define the dependency -->
+	<bean id="myXValue" class="com.chessus_editor.XValueService">
+	</bean>
+	
+	<bean id="currentBoard"
+		class="com.chessus_editor.ChessusRectangleBoard">
+		
+		<!-- set up constructor injection -->
+		<constructor-arg ref="myXValue"/>
+	</bean>
+	
+	<bean id="myUniqueBoard" class="com.chessus_editor.UniqueBoard">
+	
+		<!-- set up setter injection -->
+		<property name="boardService" ref="myXValue" />
+	</bean>
+	
+	<!-- Logger -->
+	
+	<bean id="myLoggerConfig" class="com.chessus_editor.MyLoggerConfig" init-method="initLogger">
+    	<property name="rootLoggerLevel" value="FINE" />
+    	<property name="printedLoggerLevel" value="FINE"/>
+    </bean>
+    
+    
+
+</beans>
